@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Steam Workshop Helper",
+  "version": "1.0.0",
+  "description": "Панель быстрых действий для загрузки предметов в Steam Workshop",
+
+  "icons": {
+    "16":  "icons/icon16.png",
+    "48":  "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "permissions": ["scripting", "activeTab"],
+
+  "host_permissions": [
+    "https://steamcommunity.com/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://steamcommunity.com/sharedfiles/edititem/*"],
+      "js":      ["content.js"],
+      "css":     ["panel.css"],
+      "run_at":  "document_idle"
+    }
+  ]
+}

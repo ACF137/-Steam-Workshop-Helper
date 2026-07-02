@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600&display=swap');
+
+#steam-helper-panel {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  z-index: 999999;
+  width: 200px;
+  background: rgb(13, 10, 0);
+  border: 1px solid rgb(50, 255, 200);
+  border-left: 3px solid rgb(50, 255, 200);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+  font-family: 'Rajdhani', 'Agency FB', 'Arial Black', sans-serif;
+  box-shadow:
+    0 0 8px  rgba(50,255,200,0.35),
+    0 0 24px rgba(50,255,200,0.12);
+  animation: shp-appear 0.3s ease;
+}
+
+@keyframes shp-appear {
+  from { opacity:0; transform:translateX(-16px); }
+  to   { opacity:1; transform:translateX(0);     }
+}
+
+.shp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px 5px;
+  border-bottom: 1px solid rgb(0,95,90);
+  background: linear-gradient(to right, rgba(50,255,200,0.06) 0%, transparent 100%);
+  user-select: none;
+}
+.shp-title {
+  color: rgb(50,255,200);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(50,255,200,0.8), 0 0 16px rgba(50,255,200,0.4);
+}
+.shp-title::before { content:'▸ '; opacity:0.6; }
+
+.shp-toggle {
+  background: transparent;
+  border: 1px solid rgb(0,95,90);
+  color: rgb(0,95,90);
+  width: 18px; height: 18px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; line-height: 1;
+  transition: border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.shp-toggle:hover {
+  border-color: rgb(50,255,200);
+  color: rgb(50,255,200);
+}
+
+.shp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+}
+
+.shp-btn {
+  position: relative;
+  width: 100%;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 8px;
+  overflow: hidden;
+
+  /* Срез снизу-справа, cut = 10px — точно как в C# */
+  clip-path: polygon(
+    0    0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0    100%
+  );
+
+  /* Левая полоска — изначально прозрачная, появляется при hover */
+  border-left: 3px solid transparent;
+  border-top:    1px solid transparent;
+  border-right:  1px solid transparent;
+  border-bottom: 1px solid transparent;
+
+  background: transparent;
+
+  /* TextNormal в покое */
+  color: rgb(0, 95, 90);
+
+  font-family: 'Rajdhani', 'Agency FB', 'Arial Black', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: left;
+
+  transition:
+    color       0.18s ease,
+    border-color 0.18s ease,
+    box-shadow   0.18s ease,
+    background   0.18s ease;
+}
+
+/* Номер кнопки — маленький тег, как в интерфейсе CP2077 */
+.shp-btn::before {
+  content: attr(data-num);
+  font-size: 9px;
+  color: rgb(50,255,200);
+  opacity: 0;
+  flex-shrink: 0;
+  transition: opacity 0.18s ease;
+  line-height: 1;
+}
+
+.shp-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 14px; height: 14px;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    rgba(255,255,255,0) 50%
+  );
+  transition: background 0.18s ease;
+  pointer-events: none;
+}
+
+.shp-btn:hover {
+  color: rgb(200, 255, 255);
+  border-color: rgb(50, 255, 200);
+  border-left-color: rgb(50, 255, 200);
+  background: rgba(50,255,200,0.04);
+
+  box-shadow:
+    0 0 12px rgba(50,255,200,0.30),
+    0 0  9px rgba(50,255,200,0.15),
+    0 0  6px rgba(50,255,200,0.10),
+    0 0  3px rgba(50,255,200,0.08);
+}
+
+.shp-btn:hover::before {
+  opacity: 0.8;
+}
+
+.shp-btn:hover::after {
+
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    rgba(255,255,255,0.5) 50%
+  );
+}
+
+.shp-btn:active {
+  background: rgba(255, 255, 255, 0.12);  /* alpha ≈ 60/255 ≈ 0.235, берём чуть меньше */
+  transform: scale(0.99);
+}
+
+.shp-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgb(0,95,90) 0%, transparent 100%);
+  opacity: 0.5;
+  margin: 1px 0;
+}
+
+.shp-status {
+  font-size: 10px;
+  font-family: 'Rajdhani', 'Agency FB', monospace;
+  min-height: 15px;
+  text-align: left;
+  letter-spacing: 0.06em;
+  color: transparent;
+  padding: 2px 2px;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 1px;
+}
+.shp-status--ok {
+  color: rgb(50,255,200);
+  text-shadow: 0 0 5px rgba(50,255,200,0.5);
+}
+.shp-status--error {
+  color: #ff4444;
+}

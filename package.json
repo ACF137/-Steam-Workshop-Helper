@@ -1,0 +1,22 @@
+{
+  "name": "my-extension",
+  "version": "1.0.0",
+  "description": "Моё первое расширение для браузера",
+
+  "scripts": {
+    "build":      "webpack --config webpack.config.js",
+    "watch":      "webpack --config webpack.config.js --watch",
+    "build:prod": "webpack --config webpack.config.js --mode production"
+  },
+
+  "devDependencies": {
+    "@types/chrome":    "^0.0.268",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader":       "^7.1.2",
+    "style-loader":     "^4.0.0",
+    "ts-loader":        "^9.5.1",
+    "typescript":       "^5.4.5",
+    "webpack":          "^5.91.0",
+    "webpack-cli":      "^5.1.4"
+  }
+}
