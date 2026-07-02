@@ -28,7 +28,7 @@ The panel appears automatically when you open the upload page and stays out of t
 
 Only activates on Steam Workshop upload pages:
 ```
-https://steamcommunity.com/sharedfiles/edititem/*
+https://steamcommunity.com/sharedfiles/edititem/767/3/
 ```
 On all other sites the extension does nothing.
 
